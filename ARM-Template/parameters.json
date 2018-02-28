@@ -1,0 +1,36 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "apiVersion": {
+            "value": "2015-04-08"
+        },
+        "cosmosdbLocation": {
+            "value": "eastus"
+        },
+        "storageaccountLocation01": {
+            "value": "eastus"
+        },
+        "storageaccountLocation02": {
+            "value": "japaneast"
+        },
+        "storageaccountType": {
+            "value": "Standard_LRS"
+        },
+        "storageaccountkind": {
+            "value": "Storage"
+        },
+        "httpsTrafficOnlyEnabled": {
+            "value": false
+        },
+        "functionAppLocation01": {
+            "value": "eastus"
+        },
+        "functionAppLocation02": {
+            "value": "japaneast"
+        },
+        "myUniqueID": {
+            "value": "gh"
+        }   
+    }
+}
