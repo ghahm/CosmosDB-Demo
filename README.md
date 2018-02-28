@@ -2,7 +2,7 @@
 
 을 참고하여 간편한 데모 환경을 구성하기 위해 수정한 버전입니다.
 
-### Pre-requisites (보다 간단한 환경 구성을 위해 원본과는 다르게 구성)
+### Pre-requisites (보다 간단한 환경 구성과 실행 환경을 위해 원본과는 다르게 구성)
 * Windows용 npm (https://nodejs.org/en/download/) : node.js로 작성된 웹앱 및 Cosmos DB의 데이터 생성용 스크립트 실행
 * Visual Studio Code 또는 기타 Editor
 * Angular CLI 2-1.0.0-alpha6 (Demo 순서에 포함되어 있음)
