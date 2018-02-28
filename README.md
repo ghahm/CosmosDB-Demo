@@ -18,4 +18,5 @@ You will come across the power of Azure Cosmos DB's features such as **Turnkey g
 [Scenario 2: Consistency](https://github.com/Microsoft/developer-immersion-data/blob/master/labs/sp-gda/gdaexpericence1/story_a_gda_using_cosmosdb/content/1.md) <br>
 [Scenario 3: Multi-model API](https://github.com/Microsoft/developer-immersion-data/blob/master/labs/sp-gda/gdaexpericence1/story_a_gda_using_cosmosdb/content/2.md) <br>
 [Scenario 4: Partitioning](https://github.com/Microsoft/developer-immersion-data/blob/master/labs/sp-gda/gdaexpericence1/story_a_gda_using_cosmosdb/content/3.md) <br>
-[Conclusion](https://github.com/Microsoft/developer-immersion-data/blob/master/labs/sp-gda/gdaexpericence1/story_a_gda_using_cosmosdb/content/conclusion.md)
+[Conclusion](https://github.com/Microsoft/developer-immersion-data/blob/master/labs/sp-gda/gdaexpericence1/story_a_gda_using_cosmosdb/content/conclusion.md) <br>
+***(참고)*** Scenario 2와 3의 Visual Studio 환경 및 실행 위치 등은 Scenario 1에서 설명한 변경 가이드를 참고하여 적절히 실행
