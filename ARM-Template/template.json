@@ -1,0 +1,210 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "apiVersion": {
+            "defaultValue": "2015-04-08",
+            "type": "string"
+        },
+        "cosmosdbLocation": {
+            "defaultValue": "koreacentral",
+            "type": "string"
+        },
+        "storageaccountLocation01": {
+            "type": "string"
+        },
+        "storageaccountLocation02": {
+            "type": "string"
+        },
+        "storageaccountType": {
+            "type": "string"
+        },
+        "storageaccountkind": {
+            "type": "string"
+        },
+        "httpsTrafficOnlyEnabled": {
+            "type": "bool"
+        },
+        "functionAppLocation01": {
+            "type": "string"
+        },
+        "functionAppLocation02": {
+            "type": "string"
+        },
+        "myUniqueID": {
+            "type": "string"
+        }
+    },
+    "variables": {
+        "cosmosdocdbName": "[concat('contosoairdocdb-', parameters('myUniqueID'), '-', toLower(parameters('cosmosdbLocation')) )]"
+        ,
+        "cosmosmongodbName": "[concat('contosoairmongodb-', parameters('myUniqueID'), '-', toLower(parameters('cosmosdbLocation')) )]"
+        ,
+        "storageaccountName01": "[concat('contosoair', parameters('myUniqueID'), toLower(parameters('storageaccountLocation01')) )]"
+        ,
+        "storageaccountName02": "[concat('contosoair', parameters('myUniqueID'), toLower(parameters('storageaccountLocation02')) )]"
+        ,
+        "functionAppName01": "[concat('contosoairapp-', parameters('myUniqueID'), '-',toLower(parameters('storageaccountLocation01')) )]"
+        ,
+        "functionAppName02": "[concat('contosoairapp-', parameters('myUniqueID'), '-',toLower(parameters('storageaccountLocation02')) )]"
+        ,
+        "subscriptionId": "[subscription().subscriptionId]"
+        ,
+        "resourceGroupName": "[resourceGroup().name]"
+    },  
+    "resources": [
+        {
+            "type": "Microsoft.DocumentDB/databaseAccounts",
+            "kind": "GlobalDocumentDB",
+            "name": "[toLower(variables('cosmosdocdbName'))]",
+            "apiVersion": "[parameters('apiVersion')]",
+            "location": "[parameters('cosmosdbLocation')]",
+            "tags": {},
+            "properties": {
+                "databaseAccountOfferType": "Standard",
+                "name": "[toLower(variables('cosmosdocdbName'))]"
+            },
+            "dependsOn": []
+        },
+        {
+            "type": "Microsoft.DocumentDB/databaseAccounts",
+            "kind": "MongoDB",
+            "name": "[toLower(variables('cosmosmongodbName'))]",
+            "apiVersion": "[parameters('apiVersion')]",
+            "location": "[parameters('cosmosdbLocation')]",
+            "properties": {
+                "databaseAccountOfferType": "Standard",
+                "name": "[toLower(variables('cosmosmongodbName'))]",
+            },
+            "dependsOn": []
+        },
+        {
+            "apiVersion": "2017-10-01",
+            "name": "[toLower(variables('storageaccountName01'))]",
+            "location": "[parameters('storageaccountLocation01')]",
+            "type": "Microsoft.Storage/storageAccounts",
+            "sku": {
+                "name": "[parameters('storageaccountType')]"
+            },
+            "kind": "[parameters('storageaccountkind')]",
+            "properties": {
+                "supportsHttpsTrafficOnly": "[parameters('httpsTrafficOnlyEnabled')]",
+                "encryption": {
+                    "services": {
+                        "blob": {
+                            "enabled": true
+                        },
+                        "file": {
+                            "enabled": true
+                        }
+                    },
+                    "keySource": "Microsoft.Storage"
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "apiVersion": "2017-10-01",
+            "name": "[toLower(variables('storageaccountName02'))]",
+            "location": "[parameters('storageaccountLocation02')]",
+            "type": "Microsoft.Storage/storageAccounts",
+            "sku": {
+                "name": "[parameters('storageaccountType')]"
+            },
+            "kind": "[parameters('storageaccountkind')]",
+            "properties": {
+                "supportsHttpsTrafficOnly": "[parameters('httpsTrafficOnlyEnabled')]",
+                "encryption": {
+                    "services": {
+                        "blob": {
+                            "enabled": true
+                        },
+                        "file": {
+                            "enabled": true
+                        }
+                    },
+                    "keySource": "Microsoft.Storage"
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "apiVersion": "2016-03-01",
+            "name": "[variables('functionAppName01')]",
+            "type": "Microsoft.Web/sites",
+            "properties": {
+                "name": "[variables('functionAppName01')]",
+                "siteConfig": {
+                    "appSettings": [
+                        {
+                            "name": "AzureWebJobsDashboard",
+                            "value": "[concat('DefaultEndpointsProtocol=https;AccountName=',variables('storageaccountName01'),';AccountKey=',listKeys(resourceId(variables('subscriptionId'),variables('resourceGroupName'),'Microsoft.Storage/storageAccounts', variables('storageaccountName01')), '2015-05-01-preview').key1)]"
+                        },
+                        {
+                            "name": "AzureWebJobsStorage",
+                            "value": "[concat('DefaultEndpointsProtocol=https;AccountName=',variables('storageaccountName01'),';AccountKey=',listKeys(resourceId(variables('subscriptionId'),variables('resourceGroupName'),'Microsoft.Storage/storageAccounts', variables('storageaccountName01')), '2015-05-01-preview').key1)]"
+                        },
+                        {
+                            "name": "FUNCTIONS_EXTENSION_VERSION",
+                            "value": "~1"
+                        },
+                        {
+                            "name": "WEBSITE_CONTENTAZUREFILECONNECTIONSTRING",
+                            "value": "[concat('DefaultEndpointsProtocol=https;AccountName=',variables('storageaccountName01'),';AccountKey=',listKeys(resourceId(variables('subscriptionId'),variables('resourceGroupName'),'Microsoft.Storage/storageAccounts', variables('storageaccountName01')), '2015-05-01-preview').key1)]"
+                        },
+                        {
+                            "name": "WEBSITE_CONTENTSHARE",
+                            "value": "[concat(toLower(variables('functionAppName01')), 'b201')]"
+                        },
+                        {
+                            "name": "WEBSITE_NODE_DEFAULT_VERSION",
+                            "value": "6.5.0"
+                        }
+                    ]
+                },
+                "clientAffinityEnabled": false
+            },
+            "location": "[parameters('functionAppLocation01')]",
+            "kind": "functionapp"
+        },
+        {
+            "apiVersion": "2016-03-01",
+            "name": "[variables('functionAppName02')]",
+            "type": "Microsoft.Web/sites",
+            "properties": {
+                "name": "[variables('functionAppName02')]",
+                "siteConfig": {
+                    "appSettings": [
+                        {
+                            "name": "AzureWebJobsDashboard",
+                            "value": "[concat('DefaultEndpointsProtocol=https;AccountName=',variables('storageaccountName02'),';AccountKey=',listKeys(resourceId(variables('subscriptionId'),variables('resourceGroupName'),'Microsoft.Storage/storageAccounts', variables('storageaccountName02')), '2015-05-01-preview').key1)]"
+                        },
+                        {
+                            "name": "AzureWebJobsStorage",
+                            "value": "[concat('DefaultEndpointsProtocol=https;AccountName=',variables('storageaccountName02'),';AccountKey=',listKeys(resourceId(variables('subscriptionId'),variables('resourceGroupName'),'Microsoft.Storage/storageAccounts', variables('storageaccountName02')), '2015-05-01-preview').key1)]"
+                        },
+                        {
+                            "name": "FUNCTIONS_EXTENSION_VERSION",
+                            "value": "~1"
+                        },
+                        {
+                            "name": "WEBSITE_CONTENTAZUREFILECONNECTIONSTRING",
+                            "value": "[concat('DefaultEndpointsProtocol=https;AccountName=',variables('storageaccountName02'),';AccountKey=',listKeys(resourceId(variables('subscriptionId'),variables('resourceGroupName'),'Microsoft.Storage/storageAccounts', variables('storageaccountName02')), '2015-05-01-preview').key1)]"
+                        },
+                        {
+                            "name": "WEBSITE_CONTENTSHARE",
+                            "value": "[concat(toLower(variables('functionAppName02')), 'b201')]"
+                        },
+                        {
+                            "name": "WEBSITE_NODE_DEFAULT_VERSION",
+                            "value": "6.5.0"
+                        }
+                    ]
+                },
+                "clientAffinityEnabled": false
+            },
+            "location": "[parameters('functionAppLocation02')]",
+            "kind": "functionapp"
+        }
+    ]
+}
