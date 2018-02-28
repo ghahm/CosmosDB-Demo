@@ -1,3 +1,5 @@
+# Change variables to yours from (1) to (5)
+
 #######################################################
 # 1. If neccessary, select Azure RM Subscription
 #######################################################
@@ -26,7 +28,7 @@ else{
 
 
 #################################################
-# (3) Create DEMO resources
+# 3. Create DEMO resources
 #################################################
 $templateFile = "D:\For Work\Azure\Azure Powershell Scripts\Cosmos\ARMTemplates\CreateCosmosDB-HOL-01\template.json" # (4) Change your template file
 $parametersFile = "D:\For Work\Azure\Azure Powershell Scripts\Cosmos\ARMTemplates\CreateCosmosDB-HOL-01\parameters.json" #(5) Change your parameter file
