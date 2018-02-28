@@ -3,7 +3,7 @@
 을 참고하여 간편한 데모 환경을 구성하기 위해 수정한 버전입니다.
 
 ### Pre-requisites (보다 간단한 환경 구성을 위해 원본과는 다르게 구성)
-* Windows용 npm (https://nodejs.org/en/download/) - node.js로 작성된 웹앱 및 Cosmos DB의 데이터 생성용 스크립트 실행
+* Windows용 npm (https://nodejs.org/en/download/) : node.js로 작성된 웹앱 및 Cosmos DB의 데이터 생성용 스크립트 실행
 * Visual Studio Code 또는 기타 Editor
 * Angular CLI 2-1.0.0-alpha6 (Demo 순서에 포함되어 있음)
 
@@ -13,9 +13,9 @@ It used to take extensive time and monotonous efforts to build a Globally Distri
 You will come across the power of Azure Cosmos DB's features such as **Turnkey global distribution, Consistency, Multi-model API, Partitioning, Failover mechanism** and **SLA's** using **ContosoAir** website along with **SQL DB API, Mongo DB API** and **Azure Functions**.
 
 ### Scenarios
-Intro
-Scenario 1: Globally distributed application for experiencing low latency
-Scenario 2: Consistency
-Scenario 3: Multi-model API
-Scenario 4: Partitioning
+[Intro](https://github.com/ghahm/CosmosDB-Demo-01/blob/master/content/intro.md) <br>
+Scenario 1: Globally distributed application for experiencing low latency <br>
+Scenario 2: Consistency <br>
+Scenario 3: Multi-model API <br>
+Scenario 4: Partitioning <br>
 Conclusion
