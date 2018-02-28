@@ -8,9 +8,9 @@
 * Angular CLI 2-1.0.0-alpha6 (Demo 순서에 포함되어 있음)
 
 ### Introduction (원본 내용)
-It used to take extensive time and monotonous efforts to build a Globally Distributed Database conventionally. Also, there were some issues of Latency and Consistency in case of the data stored in a centralized location. So, to unravel this we will use the Azure Cosmos Database.
+It used to take extensive time and monotonous efforts to build a Globally Distributed Database conventionally. Also, there were some issues of **Latency** and **Consistency** in case of the data stored in a centralized location. So, to unravel this we will use the **Azure Cosmos Database**.
 
-You will come across the power of Azure Cosmos DB's features such as Turnkey global distribution, Consistency, Multi-model API, Partitioning, Failover mechanism and SLA's using ContosoAir website along with SQL DB API, Mongo DB API and Azure Functions.
+You will come across the power of Azure Cosmos DB's features such as **Turnkey global distribution, Consistency, Multi-model API, Partitioning, Failover mechanism** and **SLA's** using **ContosoAir** website along with **SQL DB API, Mongo DB API** and **Azure Functions**.
 
 # 1. Clone this repo
    git clone https://github.com/hdinsight/tpcds-hdinsight/ && cd tpcds-hdinsight
