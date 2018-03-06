@@ -13,3 +13,5 @@ https://github.com/Microsoft/developer-immersion-data/blob/master/labs/sp-gda/gd
 
 3. 데모 아키텍처
 * ***ContosoAir Web Service (PC) -> ContosoAir App Service (Function App in Japan East) -> ContosoAir Cosmos DBs (Document DB and Mongo DB in East US or Japan East)***
+
+[[Home]](https://github.com/ghahm/CosmosDB-Demo-01) / [[Next]](https://github.com/ghahm/CosmosDB-Demo-01/blob/master/content/0.md)
